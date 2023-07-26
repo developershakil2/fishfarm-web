@@ -130,7 +130,7 @@ const modalFunc=()=>{
     <div  className="cat_wrap w-[70%] mx-auto flex justify-between items-center">
     {catData?.length > 0 &&
   catData.map((el) => (
-      <div key={el?._id} onClick={() => {setBuyWrap("flex"); setCatValue(`${el._id}`)}} className="cat_card hover:cursor-pointer rounded-xl w-[130px] h-[130px] bg-white flex justify-center items-center flex-col">
+      <div key={el?._id} onClick={() => {setBuyWrap("flex"); setCatValue(`${el._id}`)}} className="cat_card hover:cursor-pointer my-3 rounded-xl w-[130px] h-[130px] bg-white flex justify-center items-center flex-col">
         <img src={el?.productIcon} alt="fish" className="w-[80px] h-[80px] rounded-full mb-2" />
         <h5>{el?.productName}</h5>
       </div>
