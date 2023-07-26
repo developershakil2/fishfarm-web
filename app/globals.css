@@ -392,6 +392,14 @@ body {
   display:none
 }
 @media screen and (max-width:768px){
+  .cat_wrap{
+    flex-direction:column;
+    width:95%;
+    margin:0 auto;
+  }.cat_card{
+    width:120px ;
+    height:120px
+  }
   .hero_p{
     width:350px;
   }

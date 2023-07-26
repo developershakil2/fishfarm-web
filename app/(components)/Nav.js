@@ -27,7 +27,7 @@ const Nav =({color, visibility, vl, wd})=>{
                         <a href="/referral" style={{color:color, display:vl}} className="text-sm font-black">referral</a>
                         <a href="/profile" style={{color:color, display:vl}} className="text-sm font-black">profile</a>
                      </div>
-                     <button onClick={()=> setDhandle('flex')} className="w-[40px] navBtn flex justify-end m-4"><img className="w-[35px] h-[35px] rounded-md" src="images/nav.png" alt="close"/></button>
+                     <button onClick={()=> setDhandle('flex')} className="w-[40px] navBtn flex justify-end m-4"><img className="w-[35px] h-[35px] rounded-md" src="images/navicon.png" alt="close"/></button>
                      <div className="flex menu_wrap_web justify-between items-center h-[70px] " style={{width:wd}}>
                        
 

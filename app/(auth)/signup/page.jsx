@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import Nav from "../(components)/Nav";
+import Nav from "../../(components)/Nav";
 import axios from 'axios';
 import { useRouter } from "next/navigation";
 const Signup =()=>{
@@ -11,9 +11,11 @@ const Signup =()=>{
     const [username, setUsername] = useState('');
     const [selectImage, setSelectImage] = useState('');
     const [previewUrl, setPreviewUrl] = useState('');
+    const [referral, setReferral] = useState('');
     const [mod, setMod] = useState(false);
     const [code , setCode] = useState('');
-   
+    const [modalTitle, setModalTitle] = useState('');
+  const [modalHandle, setModalHandle] = useState('none');
     const handleImageChange = (event) => {
       const file = event.target.files[0];
       setSelectImage(file);
@@ -39,7 +41,7 @@ const Signup =()=>{
   
     const signupHandle = () => {
       if (!selectImage) {
-        console.log('Please select an image and enter the amount.');
+        alert('Please select an image and enter the amount.');
         return;
       }
   
@@ -58,6 +60,8 @@ const Signup =()=>{
       }).then((res) => {
         setUserResponse(res.data);
         if(res.status == 200){
+          setModalHandle('flex');
+          setModalTitle(res.data);
            setTimeout(()=>{
             push('/login')
            },2000);
@@ -67,13 +71,15 @@ const Signup =()=>{
       });
     };
     const sendCode = ()=>{
-
-         axios.post("https://fishfarm.onrender.com/sendotp", phone).then((res)=>{
+                   
+         axios.post("https://fishfarm.onrender.com/sendotp", `+1${phone}`).then((res)=>{
                      
                   if(res.status == 200){
                     setTimeout(()=>{
                         setMod(true)
                     },1000)
+                  }else{
+                    alert('please enter a valid phone number');
                   }
          }).catch((err)=>{
             console.log(err);
@@ -81,10 +87,10 @@ const Signup =()=>{
 
     }
     const verifying = ()=>{
-
-         axios.post("https://fishfarm.onrender.com/getCode",{phone:phone, code:code}).then((res)=>{
+     
+    axios.post("https://fishfarm.onrender.com/getCode",{phone:`+1${phone}`, code:code}).then((res)=>{
                  
-               if(res.status == 200){
+               if(res && res.status === 200){
                 setMod(false);
                 signupHandle();
                
@@ -96,8 +102,22 @@ const Signup =()=>{
          })
         
         }
+
+
+        const modalFunc=()=>{
+          setModalHandle('none');
+          setBuyWrap('none');
+        }  
     return(
         <>
+
+<div style={{display:modalHandle}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
+             <div className="w-[320px] flex flex-col p-10 justify-center items-center h-[320px] rounded-xl bg-white">
+                   <h2 className="text-md font-bold text-center ">{modalTitle}</h2>
+                   <button onClick={modalFunc} className="bg-black p-5 mt-5 rounded-full text-white px-20 font-black">Okay</button>
+                   
+             </div>
+    </div>
         <div className="bg-gradient-to-t from-[#11292d] overflow-hidden h-screen to-sky-500 relative ">
        
 
@@ -144,16 +164,16 @@ const Signup =()=>{
   </div>
     }
         <div className="w-[350px]   bg-[#0098ff75] rounded-xl">
-            <h2 className="text-center py-3 mt-6 text-xl text-white font-black">
+            <h2 className="text-center py-3 mt-4 text-xl text-white font-black">
                  Sign Up
             </h2>
          
-            <div className="flex flex-col justify-center px-5 mb-4 items-start">
+            <div className="flex flex-col justify-center px-5 mb-2 items-start">
                 <label  name="username" className="text-white font-bold ml-3 text-sm">Select Your Profile Photo *</label>
                 <input onChange={handleImageChange} type="file" className="w-full text-white rounded-2xl profile_photo py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="your full legal name" />
             </div>
 
-            <div className="flex flex-col justify-center px-5 mb-4 items-start">
+            <div className="flex flex-col justify-center px-5 mb-2 items-start">
                 <label  name="username" className="text-white font-bold ml-3 text-sm">Your Full Legal Name *</label>
                 <input value={username} onChange={(e)=>setUsername(e.target.value)} type="text" className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="your full legal name" />
             </div>
@@ -164,13 +184,18 @@ const Signup =()=>{
             </div>
 
 
-            <div className="flex flex-col justify-center px-5 my-5 items-start">
+            <div className="flex flex-col justify-center px-5 my-2 items-start">
                 <label  name="phone" className="text-white font-bold text-sm ml-3">password *</label>
                 <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="your password" />
             </div>
+
+            <div className="flex flex-col justify-center px-5 my-2 items-start">
+                <label  name="phone" className="text-white font-bold text-sm ml-3">refercode optional ! *</label>
+                <input type="text" value={referral} onChange={(e)=> setReferral(e.target.value)} className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="refer code optional !" />
+            </div>
             <h3 className="text-center text-white my-3">{userResponse}</h3>
             <div className="flex flex-col justify-center px-5  items-start">
-                <button type="button" onClick={()=> sendCode()} className="w-full rounded-2xl mt-4 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
+                <button type="button" onClick={()=> signupHandle()} className="w-full rounded-2xl mt-4 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
                     Sign Up
                 </button>
                 <p className="text-white mt-5 mb-10">i don't have an account  <a className="text-blue-400" href="/login">Login</a></p>

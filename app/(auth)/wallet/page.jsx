@@ -10,7 +10,9 @@ const Wallet =()=>{
     const [data, setData] = useState('loading..');
     const [trans , setTrans] = useState('');
     const {push} = useRouter();
+    const [reData, setRedata] = useState('');
        console.log(trans)
+
      useEffect(()=>{
         const storedData = localStorage.getItem('usersOb');
         const data = JSON.parse(storedData);
@@ -22,7 +24,11 @@ const Wallet =()=>{
             console.log(err);
          })
 
-
+         axios.get(`https://fishfarm.onrender.com/login/${data.userphone}`).then((res)=>{
+            setRedata(res.data)
+}).catch((err)=>{
+   console.log(err)
+})
      },[]);
      
      const redFunc = ()=>{
@@ -72,7 +78,7 @@ const Wallet =()=>{
                 <div className="flex flex-col justify-center px-5 my-5 items-start">
                 <h2 className="text-white font-black text-xl">Balance</h2>
                 <div className="w-full h-[2px] bg-[#fff] my-2"></div>
-                <h2 className="text-white font-black text-2xl">₱{data?.userBal}</h2>
+                <h2 className="text-white font-black text-2xl">₱{Math.floor(reData?.balance)}</h2>
                 
                     
                 </div>
@@ -84,7 +90,7 @@ const Wallet =()=>{
                 <div className="flex flex-col justify-center px-5 my-5 items-start">
                 <h2 className="text-white font-black text-xl">Referral Bonus</h2>
                 <div className="w-full h-[2px] bg-[#fff] my-2"></div>
-                <h2 className="text-white font-black text-2xl">₱{data?.userRefBal}</h2>
+                <h2 className="text-white font-black text-2xl">₱{reData?.refBal}</h2>
                 
                     
                 </div>

@@ -11,19 +11,23 @@ const Dashboard =()=>{
 
     const [data, setData] = useState('loading..');
     const [trans , setTrans] = useState('');
-    
+    const [reData, setRedata] = useState('');
        console.log(trans)
      useEffect(()=>{
         const storedData = localStorage.getItem('usersOb');
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`https://fishfarm.onrender.com/getuni/${data?.userId}`).then((res)=>{
-               setTrans(res.data);
+         axios.get(`https://fishfarm.onrender.com/purchasedata/${data?.userId}`).then((res)=>{
+               setTrans(res.data.reverse());
          }).catch((err)=>{
             console.log(err);
          })
-
+         axios.get(`https://fishfarm.onrender.com/login/${data.userphone}`).then((res)=>{
+                     setRedata(res.data)
+         }).catch((err)=>{
+            console.log(err)
+         })
 
      },[]);
      
@@ -76,34 +80,41 @@ const Dashboard =()=>{
                 <div className="flex flex-col justify-center px-5 my-5 items-start">
                 <h2 className="text-white font-black text-xl">Balance</h2>
                 <div className="w-full h-[2px] bg-[#fff] my-2"></div>
-                <h2 className="text-white font-black text-2xl">₱{data?.userBal}</h2>
+                <h2 className="text-white font-black text-2xl">₱{Math.floor(reData?.balance)}</h2>
                 
                     
                 </div>
 
             
             </div>
-    {/* 
-            <div className="w-[350px]  my-4 mx-2 bg-[#0098ff75] rounded-xl">
+    
+           
+    <div className="w-[350px] justify-center items-center my-2 mx-2  bg-[#0098ff75] rounded-xl">
                 <div className="flex flex-col justify-center px-5 my-5 items-start">
-                <h2 className="text-white font-black text-xl">Referral Bonus</h2>
-                <div className="w-full h-[2px] bg-[#fff] my-2"></div>
-                <h2 className="text-white font-black text-2xl">₱1430945</h2>
-                
-                    
+                <a href="/addbal"  className="w-full mx-auto mb-2"> 
+                                <div className="w-full flex justify-center itmes-center flex-col">
+                                     <img src="images/add.png" alt="add" className="w-[50px] mx-auto h-[50px] rounded-full addIcon "/>
+                                    <p className="text-white text-center">Request for add balance</p>
+                                </div>
+                    </a>
                 </div>
+
             
-            </div> */}
+            </div>
     </div>
 
     <div className="w-[350px] justify-center items-center my-2 mx-2  bg-[#0098ff75] rounded-xl">
                 <div className="flex flex-col justify-center px-5 my-5 items-start">
-                                
+                <a href="/buyfish" className="w-full mx-auto mb-2"> 
+                                  
                                 <div className="w-full flex justify-center itmes-center flex-col">
-                                    <a href="/addbal" className="w-[50px] mx-auto mb-2">   <img src="images/add.png" alt="add" className="w-[50px] h-[50px] rounded-full addIcon "/></a>
-                                    <p className="text-white text-center">Request for add balance</p>
+                 <div className="p-1 w-[70px] mx-auto h-[70px] rounded-full border-[1px]">
+                                  
+                                    <img src="images/fish.png" alt="fish" className="w-[60px] h-[60px] rounded-full addIcon "/>
+                                        </div>
+                                    <p className="text-white text-center ">Start Earn</p>
                                 </div>
-                    
+                                </a>
                 </div>
 
             
@@ -126,60 +137,61 @@ const Dashboard =()=>{
                                 {
                                 trans &&  trans.map((el) => (
                     
-                                   el.type == 'deposit'?  <div key={el._id} className="trans_card my-5 bg-[#0098ff75] w-[60%] mx-auto flex justify-between items-center px-5 py-3 rounded-xl">
+                                   el.isWithdrawn == false?  <div key={el._id} className="trans_card my-5 bg-[#0098ff75] w-[60%] mx-auto flex justify-between items-center px-5 py-3 rounded-xl">
                                    <div className="">
                                       <img src="images/transfergreen.png" alt="transfer green"  className="w-[25px] h-[25px]"/>
-                                      <p className="text-[#289f8b] text-sm mt-2 ">{el?.type}</p>
-                                     
+                                      {
+                                    el.isWithdrawn == false ?  <p className="text-green-600 text-sm mt-0">bought</p> : el.isWithdrawn == true ? <p className="text-red-600 text-sm mt-0">withdrawn</p>:<p className="text-red-600 text-sm mt-0"></p>
+                                   }
                                    </div>
                                    <div className="">
                                     <p className="text-white text-sm mt-0">{moment(el?.createdAt).format("MMM YYYY h:m:s a")}</p>
-                                    {
-                                    el.status == 'pending' ?  <p className="text-yellow-600 text-sm mt-0">{el.status}</p> : el.status == 'approved' ? <p className="text-green-600 text-sm mt-0">{el.status}</p>:<p className="text-red-600 text-sm mt-0">{el.status}</p>
-                                   }
+                                     <p className="text-white">earning from this product</p>
+                                    <p className="text-white font-black ">₱{el?.earnings.toFixed(2)}</p>
                                      </div>
                                      <div className="">
                                      <LazyLoadImage
-                                            src={el?.proofImg}
+                                            src={el.productIcon}
                                             alt="trans img"
                                             layout="responsive"
                                             width={35}
                                             height={35}
                                             className="rounded-full h-[35px] w-[35]"
                                             />
-
+                                        <p className="text-[#289f8b] text-sm mt-2 ">{el.productName}</p>
+                                     
                                      </div>
 
                                      <div className="">
-                                     <p className="text-white text-sm font-black">₱{el.amount}</p>
+                                     <p className="text-white text-sm font-black">₱{el.buyAmount}</p>
                                      </div>
                                </div> :  <div key={el._id} className="trans_card my-5 bg-[#0098ff75] w-[60%] mx-auto flex justify-between items-center px-5 py-3 rounded-xl">
                                    <div className="">
                                       <img src="images/transfer.png" alt="transfer green"  className="w-[25px] h-[25px]"/>
-                                      <p className="text-[red] text-sm mt-2 ">{el.type}</p>
+                                      {
+                                    el.isWithdrawn == true ?  <p className="text-red-600 text-sm mt-0">withdrawn</p> : ''
+                                   }
                                      
                                    </div>
                                    <div className="">
                                     <p className="text-white text-sm mt-0">{moment(el.createdAt).format("MMM YYYY h:m:s a")}</p>
-                                   {
-                                    el.status == 'pending' ?  <p className="text-yellow-600 text-sm mt-0">{el.status}</p> : el.status == 'approved' ? <p className="text-green-600 text-sm mt-0">{el.status}</p>:<p className="text-red-600 text-sm mt-0">{el.status}</p>
-                                   }
+                                  
                                    
                                      </div>
                                      <div className="">
                                      <LazyLoadImage
-                                            src={el?.proofImg? el?.proofImg : 'images/fish.png'}
+                                            src={el.productIcon}
                                             alt="trans img"
                                             layout="responsive"
                                             width={35}
                                             height={35}
                                             className="rounded-full h-[35px] w-[35]"
                                             />
-
+   <p className="text-[red] text-sm mt-2 ">{el.productName}</p>
                                      </div>
 
                                      <div className="">
-                                     <p className="text-white text-sm font-black">₱{el.amount}</p>
+                                     <p className="text-white text-sm font-black">₱{el.buyAmount}</p>
                                      </div>
                                </div>
 

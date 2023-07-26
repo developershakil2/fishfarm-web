@@ -12,9 +12,6 @@ const Login =()=>{
  console.log(logData)
       
 
-
-     
-
  const loginHandle = () => {
   axios.get(`https://fishfarm.onrender.com/login/${phone}`)
     .then((res) => {
