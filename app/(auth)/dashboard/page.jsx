@@ -39,7 +39,7 @@ const Dashboard =()=>{
 
     return(
         <>
-        <div className="bg-gradient-to-t from-[#11292d] overflow-hidden h-screen to-sky-500 relative ">
+        <div className="bg-gradient-to-t from-[#11292d] overflow-x-hidden h-screen to-sky-500 relative ">
        
 
        <img src="images/fish.png" alt="fish"  className="w-[140px] h-[140px] fish1 absolute"/>
