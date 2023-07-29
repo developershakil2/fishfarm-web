@@ -47,7 +47,7 @@ const [dnone, setdDnone] = useState('block')
                formData.append('proofImg', blob, uniqueFilename);
 
       axios
-        .post('http://localhost:5000/transaction', formData, {
+        .post('https://fishfarm.onrender.com/transaction', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

@@ -28,7 +28,7 @@ const Withdraw =()=>{
         formData.append('type', 'withdraw');
         formData.append('bankName', bankName);
           
-           axios.post('http://localhost:5000/transaction', formData, {
+           axios.post('https://fishfarm.onrender.com/transaction', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
