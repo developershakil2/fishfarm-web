@@ -19,7 +19,7 @@ const Referral =()=>{
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`https://fishfarm.onrender.com/getuni/${data?.userId}`).then((res)=>{
+         axios.get(`http://api.isda.farm/getuni/${data?.userId}`).then((res)=>{
                setTrans(res.data);
          }).catch((err)=>{
             console.log(err);
@@ -80,7 +80,7 @@ const Referral =()=>{
                           <h3 className="text-center text-sm font-[600] text-white  my-4">{data.userId}</h3>
            </div>
           <div className="flex mt-3 flex-col justify-center px-5 w-full items-start">
-              <button onClick={ ()=> navigator.clipboard.writeText(data.userId) && alert("you copied refer code")} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
+              <button onClick={ ()=> {navigator.clipboard.writeText(data.userId) , alert("you copied refer code")}} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
                   Copy Your Refer Code
               </button>
             
