@@ -365,12 +365,12 @@ const Dashboard = ()=>{
         const storedData = localStorage.getItem("usersOb");
         const data = JSON.parse(storedData);
         setData(data);
-        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com//purchasedata/${data?.userId}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com/purchasedata/${data?.userId}`).then((res)=>{
             setTrans(res.data.reverse());
         }).catch((err)=>{
             console.log(err);
         });
-        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com//login/${data.userphone}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com/login/${data.userphone}`).then((res)=>{
             setRedata(res.data);
         }).catch((err)=>{
             console.log(err);
@@ -382,7 +382,7 @@ const Dashboard = ()=>{
     const [modalHandle2, setModalHandle2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("none");
     const [pId, setSinlgeId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const claim = async ()=>{
-        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.post(`https://fishfarm.onrender.com//claim/${data?.userId}`, {
+        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.post(`https://fishfarm.onrender.com/claim/${data?.userId}`, {
             pId
         }).then((res)=>{
             setClaimRes(res.data);

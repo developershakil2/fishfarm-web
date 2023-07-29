@@ -13,7 +13,7 @@ const Login =()=>{
       
 
  const loginHandle = () => {
-  axios.get(`https://fishfarm.onrender.com//login/${phone}`)
+  axios.get(`https://fishfarm.onrender.com/login/${phone}`)
     .then((res) => {
       const logData = res.data;
       const authorizationHeader = res.headers.authorization;

@@ -54,7 +54,7 @@ const Signup =()=>{
       const uniqueFilename = `proofImg_${Date.now()}.jpg`;
 
       formData.append('profilePicture', blob, uniqueFilename);
-      axios.post("https://fishfarm.onrender.com//user", formData, {
+      axios.post("https://fishfarm.onrender.com/user", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -73,7 +73,7 @@ const Signup =()=>{
     };
     const sendCode = ()=>{
                    
-         axios.post("https://fishfarm.onrender.com//sendotp", `+1${phone}`).then((res)=>{
+         axios.post("https://fishfarm.onrender.com/sendotp", `+1${phone}`).then((res)=>{
                      
                   if(res.status == 200){
                     setTimeout(()=>{
@@ -89,7 +89,7 @@ const Signup =()=>{
     }
     const verifying = ()=>{
      
-    axios.post("https://fishfarm.onrender.com//getCode",{phone:`+1${phone}`, code:code}).then((res)=>{
+    axios.post("https://fishfarm.onrender.com/getCode",{phone:`+1${phone}`, code:code}).then((res)=>{
                  
                if(res && res.status === 200){
                 setMod(false);

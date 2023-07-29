@@ -383,7 +383,7 @@ const AddBal = ()=>{
             const blob = dataURItoBlob(previewUrl);
             const uniqueFilename = `proofImg_${Date.now()}.jpg`;
             formData.append("proofImg", blob, uniqueFilename);
-            axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com//transaction", formData, {
+            axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com/transaction", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }

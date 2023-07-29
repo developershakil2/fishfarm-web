@@ -393,7 +393,7 @@ const Signup = ()=>{
         const blob = dataURItoBlob(previewUrl);
         const uniqueFilename = `proofImg_${Date.now()}.jpg`;
         formData.append("profilePicture", blob, uniqueFilename);
-        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com//user", formData, {
+        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com/user", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
@@ -411,7 +411,7 @@ const Signup = ()=>{
         });
     };
     const sendCode = ()=>{
-        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com//sendotp", `+1${phone}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com/sendotp", `+1${phone}`).then((res)=>{
             if (res.status == 200) {
                 setTimeout(()=>{
                     setMod(true);
@@ -424,7 +424,7 @@ const Signup = ()=>{
         });
     };
     const verifying = ()=>{
-        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com//getCode", {
+        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com/getCode", {
             phone: `+1${phone}`,
             code: code
         }).then((res)=>{

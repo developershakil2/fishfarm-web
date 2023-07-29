@@ -17,7 +17,7 @@ const BuyFish =()=>{
   useEffect(() => {
     const data = localStorage.getItem('usersOb');
     setUserData(JSON.parse(data));
-    axios.get("https://fishfarm.onrender.com//getcat").then((res)=>{
+    axios.get("https://fishfarm.onrender.com/getcat").then((res)=>{
             setCatData(res.data);
     }).catch((err)=>{
       console.log(err)
@@ -33,7 +33,7 @@ const BuyFish =()=>{
         setModalTitle("minimum buy 1000 peso ");
       }else{
         axios
-        .post('https://fishfarm.onrender.com//buyfish',
+        .post('https://fishfarm.onrender.com/buyfish',
         {
             userId:userData.userId,
             buyAmount:amount,

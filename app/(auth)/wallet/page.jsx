@@ -21,13 +21,13 @@ const Wallet =()=>{
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`https://fishfarm.onrender.com//getuni/${data?.userId}`).then((res)=>{
+         axios.get(`https://fishfarm.onrender.com/getuni/${data?.userId}`).then((res)=>{
                setTrans(res.data);
          }).catch((err)=>{
             console.log(err);
          })
 
-         axios.get(`https://fishfarm.onrender.com//login/${data.userphone}`).then((res)=>{
+         axios.get(`https://fishfarm.onrender.com/login/${data.userphone}`).then((res)=>{
             setRedata(res.data)
 }).catch((err)=>{
    console.log(err)
@@ -39,7 +39,7 @@ const Wallet =()=>{
      }
      const claim = () => {
       axios
-        .post(`https://fishfarm.onrender.com//reftrans/${data?.userId}`)
+        .post(`https://fishfarm.onrender.com/reftrans/${data?.userId}`)
         .then((res) => {
           if (res.data) {
             setModalTitle(res.data);

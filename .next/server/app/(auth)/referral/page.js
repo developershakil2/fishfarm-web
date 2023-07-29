@@ -355,7 +355,7 @@ const Referral = ()=>{
         const storedData = localStorage.getItem("usersOb");
         const data = JSON.parse(storedData);
         setData(data);
-        axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com//getuni/${data?.userId}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com/getuni/${data?.userId}`).then((res)=>{
             setTrans(res.data);
         }).catch((err)=>{
             console.log(err);

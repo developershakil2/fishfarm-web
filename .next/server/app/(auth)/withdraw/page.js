@@ -364,7 +364,7 @@ const Withdraw = ()=>{
         formData.append("bank", bank);
         formData.append("type", "withdraw");
         formData.append("bankName", bankName);
-        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com//transaction", formData, {
+        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com/transaction", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
