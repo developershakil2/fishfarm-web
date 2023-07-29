@@ -356,7 +356,7 @@ const BuyFish = ()=>{
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         const data = localStorage.getItem("usersOb");
         setUserData(JSON.parse(data));
-        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get("http://api.isda.farm/getcat").then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get("https://fishfarm.onrender.com//getcat").then((res)=>{
             setCatData(res.data);
         }).catch((err)=>{
             console.log(err);
@@ -368,7 +368,7 @@ const BuyFish = ()=>{
                 setModalHandle("flex");
                 setModalTitle("minimum buy 1000 peso ");
             } else {
-                axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("http://api.isda.farm/buyfish", {
+                axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.post("https://fishfarm.onrender.com//buyfish", {
                     userId: userData.userId,
                     buyAmount: amount,
                     productId: catValue,

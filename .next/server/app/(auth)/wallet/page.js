@@ -364,12 +364,12 @@ const Wallet = ()=>{
         const storedData = localStorage.getItem("usersOb");
         const data = JSON.parse(storedData);
         setData(data);
-        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`http://api.isda.farm/getuni/${data?.userId}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com//getuni/${data?.userId}`).then((res)=>{
             setTrans(res.data);
         }).catch((err)=>{
             console.log(err);
         });
-        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`http://api.isda.farm/login/${data.userphone}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com//login/${data.userphone}`).then((res)=>{
             setRedata(res.data);
         }).catch((err)=>{
             console.log(err);
@@ -379,7 +379,7 @@ const Wallet = ()=>{
         push("/");
     };
     const claim = ()=>{
-        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.post(`http://api.isda.farm/reftrans/${data?.userId}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z.post(`https://fishfarm.onrender.com//reftrans/${data?.userId}`).then((res)=>{
             if (res.data) {
                 setModalTitle(res.data);
                 setModalHandle("flex");

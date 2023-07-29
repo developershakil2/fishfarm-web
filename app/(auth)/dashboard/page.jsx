@@ -21,12 +21,12 @@ const Dashboard =()=>{
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`http://api.isda.farm/purchasedata/${data?.userId}`).then((res)=>{
+         axios.get(`https://fishfarm.onrender.com//purchasedata/${data?.userId}`).then((res)=>{
                setTrans(res.data.reverse());
          }).catch((err)=>{
             console.log(err);
          })
-         axios.get(`http://api.isda.farm/login/${data.userphone}`).then((res)=>{
+         axios.get(`https://fishfarm.onrender.com//login/${data.userphone}`).then((res)=>{
                      setRedata(res.data)
          }).catch((err)=>{
             console.log(err)
@@ -45,7 +45,7 @@ const Dashboard =()=>{
 
          const claim = async ()=>{
               
-            axios.post(`http://api.isda.farm/claim/${data?.userId}`, {pId}).then((res)=>{
+            axios.post(`https://fishfarm.onrender.com//claim/${data?.userId}`, {pId}).then((res)=>{
                 setClaimRes(res.data);
                 if(res.status === 200){
                     setModalHandle('flex');

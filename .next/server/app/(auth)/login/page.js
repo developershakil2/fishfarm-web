@@ -350,7 +350,7 @@ const Login = ()=>{
     const [logData, setLogData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     console.log(logData);
     const loginHandle = ()=>{
-        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`http://api.isda.farm/login/${phone}`).then((res)=>{
+        axios__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(`https://fishfarm.onrender.com//login/${phone}`).then((res)=>{
             const logData = res.data;
             const authorizationHeader = res.headers.authorization;
             if (authorizationHeader) {
