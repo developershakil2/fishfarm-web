@@ -11,6 +11,9 @@ const Wallet =()=>{
     const [trans , setTrans] = useState('');
     const {push} = useRouter();
     const [reData, setRedata] = useState('');
+    
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalHandle, setModalHandle] = useState('none')
        console.log(trans)
 
      useEffect(()=>{
@@ -18,13 +21,13 @@ const Wallet =()=>{
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`https://fishfarm.onrender.com/getuni/${data?.userId}`).then((res)=>{
+         axios.get(`http://localhost:5000/getuni/${data?.userId}`).then((res)=>{
                setTrans(res.data);
          }).catch((err)=>{
             console.log(err);
          })
 
-         axios.get(`https://fishfarm.onrender.com/login/${data.userphone}`).then((res)=>{
+         axios.get(`http://localhost:5000/login/${data.userphone}`).then((res)=>{
             setRedata(res.data)
 }).catch((err)=>{
    console.log(err)
@@ -34,12 +37,39 @@ const Wallet =()=>{
      const redFunc = ()=>{
         push('/')
      }
-
+     const claim = () => {
+      axios
+        .post(`http://localhost:5000/reftrans/${data?.userId}`)
+        .then((res) => {
+          if (res.data) {
+            setModalTitle(res.data);
+            setModalHandle('flex');
+            push('/dashboard');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    
+     const modalFunc=()=>{
+      setModalHandle('none');
+     
+    }  
     return(
         <>
-        <div className="bg-gradient-to-t from-[#11292d] overflow-hidden h-screen to-sky-500 relative ">
-       
 
+<div style={{display:modalHandle}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
+             <div className="w-[320px] flex flex-col p-10 justify-center items-center h-[320px] rounded-xl bg-white">
+                   <h2 className="text-md font-bold text-center ">{modalTitle}</h2>
+                   <button onClick={modalFunc} className="bg-black p-5 mt-5 rounded-full text-white px-20 font-black">Okay</button>
+                   
+             </div>
+    </div>
+
+
+        <div className="bg-gradient-to-t from-[#11292d] overflow-x-hidden h-screen to-sky-500 relative ">
+       
        <img src="images/fish.png" alt="fish"  className="w-[140px] h-[140px] fish1 absolute"/>
 
        <img src="images/fish.png" alt="fish"  className="w-[120px] h-[120px] fish2 absolute"/>
@@ -91,7 +121,16 @@ const Wallet =()=>{
                 <h2 className="text-white font-black text-xl">Referral Bonus</h2>
                 <div className="w-full h-[2px] bg-[#fff] my-2"></div>
                 <h2 className="text-white font-black text-2xl">₱{reData?.refBal}</h2>
-                
+                {
+  reData?.refBal && reData?.refBal > 0 ? (
+    <button onClick={() => claim()} className="text-white bg-black font-black mt-3 w-[150px] h-[40px] px-4 rounded-lg">
+      Claim Bonus
+    </button>
+  ) : (
+    ''
+  )
+}
+
                     
                 </div>
             

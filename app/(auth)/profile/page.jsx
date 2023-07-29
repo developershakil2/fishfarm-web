@@ -18,7 +18,7 @@ const Profile =()=>{
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`https://fishfarm.onrender.com/getuni/${data?.userId}`).then((res)=>{
+         axios.get(`http://localhost:5000/getuni/${data?.userId}`).then((res)=>{
                setTrans(res.data);
          }).catch((err)=>{
             console.log(err);

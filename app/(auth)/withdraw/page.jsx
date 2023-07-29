@@ -2,14 +2,17 @@
 import Nav from "../../(components)/Nav";
 import axios from 'axios';
 import {useState, useEffect} from 'react'
-
+import { useRouter } from "next/navigation";
 const Withdraw =()=>{
-
+    const {push} = useRouter();
     const [data, setData] = useState('');
-    const [wres, setWres] = useState('');
+    const [dnone, setdDnone] = useState('block')
+
     const [bankName, setBankName] = useState('');
     const [bank ,setBank] = useState('');
     const [amount, setAmount] = useState('');
+    const [modalTitle, setModalTitle] = useState('');
+    const [modalHandle, setModalHandle] = useState('none')
     useEffect(()=>{
         const storedData = localStorage.getItem('usersOb');
         const data = JSON.parse(storedData);
@@ -25,21 +28,44 @@ const Withdraw =()=>{
         formData.append('type', 'withdraw');
         formData.append('bankName', bankName);
           
-           axios.post('https://fishfarm.onrender.com/transaction', formData, {
+           axios.post('http://localhost:5000/transaction', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           }).then((res)=>{
-            setWres(res.data);
+            if(res.data){
+                setModalTitle(res.data);
+                setModalHandle('flex');
+                setTimeout(()=>{
+                  push('/dashboard');
+                },1000)
+              }
            }).catch((err)=>{
             console.log(err);
         });
+        setdDnone("none")
+    setTimeout(()=>{
+      setdDnone('block')
+    },3000);
     }
 
 
-
+ 
+    const modalFunc=()=>{
+        setModalHandle('none');
+       
+      } 
     return(
         <>
+
+<div style={{display:modalHandle}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
+             <div className="w-[320px] flex flex-col p-10 justify-center items-center h-[320px] rounded-xl bg-white">
+                   <h2 className="text-md font-bold text-center ">{modalTitle}</h2>
+                   <button onClick={modalFunc} className="bg-black p-5 mt-5 rounded-full text-white px-20 font-black">Okay</button>
+                   
+             </div>
+    </div>  
+
         <div className="bg-gradient-to-t from-[#11292d] overflow-hidden h-screen to-sky-500 relative ">
        
 
@@ -92,11 +118,11 @@ const Withdraw =()=>{
                   <label  name="phone" className="text-white font-bold ml-3 text-sm">Amount *</label>
                   <input type="number" value={amount} onChange={(e)=> setAmount(e.target.value)} className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="Withdraw Amount*" />
               </div>
-                   <h2 className="text-green-500 text-center">
+                   {/* <h2 className="text-green-500 text-center">
                       {wres ? wres :''}
-                   </h2>
+                   </h2> */}
               <div className="flex mt-3 flex-col justify-center px-5 w-full items-start">
-                  <button onClick={()=> postHandle()} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
+                  <button style={{display:dnone}} onClick={()=> postHandle()} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
                       Send Request
                   </button>
                 

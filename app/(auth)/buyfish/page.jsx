@@ -3,7 +3,9 @@
 import axios from "axios";
 import Nav from "../../(components)/Nav";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 const BuyFish =()=>{
+  const {push } = useRouter();
   const [userData, setUserData] = useState();
   const [amount, setAmount] = useState('');
   const [res, setRes] = useState('');
@@ -15,7 +17,7 @@ const BuyFish =()=>{
   useEffect(() => {
     const data = localStorage.getItem('usersOb');
     setUserData(JSON.parse(data));
-    axios.get("https://fishfarm.onrender.com/getcat").then((res)=>{
+    axios.get("http://localhost:5000/getcat").then((res)=>{
             setCatData(res.data);
     }).catch((err)=>{
       console.log(err)
@@ -31,7 +33,7 @@ const BuyFish =()=>{
         setModalTitle("minimum buy 1000 peso ");
       }else{
         axios
-        .post('https://fishfarm.onrender.com/buyfish',
+        .post('http://localhost:5000/buyfish',
         {
             userId:userData.userId,
             buyAmount:amount,
@@ -50,6 +52,9 @@ const BuyFish =()=>{
           }else if(res.status === 200){
             setModalHandle('flex');
             setModalTitle(res.data);
+              setTimeout(()=>{
+                push('/dashboard');
+              }, 4000)
           }else{
             setBuyWrap(none);
           }
@@ -127,10 +132,10 @@ const modalFunc=()=>{
    <h2 className="mb-10 text-center text-white font-black text-2xl">Select a product and buy and start earning</h2>
    <div className="w-full  flex justify-center items-center">
   
-    <div  className="cat_wrap w-[70%] mx-auto flex justify-between items-center">
+    <div  className="cat_wrap w-[70%] mx-auto flex-row flex justify-between items-center">
     {catData?.length > 0 &&
   catData.map((el) => (
-      <div key={el?._id} onClick={() => {setBuyWrap("flex"); setCatValue(`${el._id}`)}} className="cat_card hover:cursor-pointer rounded-xl w-[130px] h-[130px] bg-white flex justify-center items-center flex-col">
+      <div key={el?._id} onClick={() => {setBuyWrap("flex"); setCatValue(`${el._id}`)}} className="cat_card hover:cursor-pointer my-3 rounded-xl w-[130px] h-[130px] bg-white flex justify-center items-center flex-col">
         <img src={el?.productIcon} alt="fish" className="w-[80px] h-[80px] rounded-full mb-2" />
         <h5>{el?.productName}</h5>
       </div>
@@ -188,7 +193,7 @@ const modalFunc=()=>{
 
             <div className="flex flex-col justify-center px-5 w-full items-start">
                 <button type="button" onClick={()=> postHandle()} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
-                    Send Request
+                   Buy Now
                 </button>
               
             </div>

@@ -12,18 +12,21 @@ const Dashboard =()=>{
     const [data, setData] = useState('loading..');
     const [trans , setTrans] = useState('');
     const [reData, setRedata] = useState('');
+    const [cliamRes, setClaimRes]= useState('');
+    const [modalTitle, setModalTitle] = useState('');
+    const [modalHandle, setModalHandle] = useState('none');
        console.log(trans)
      useEffect(()=>{
         const storedData = localStorage.getItem('usersOb');
         const data = JSON.parse(storedData);
         setData(data);
 
-         axios.get(`https://fishfarm.onrender.com/purchasedata/${data?.userId}`).then((res)=>{
+         axios.get(`http://localhost:5000/purchasedata/${data?.userId}`).then((res)=>{
                setTrans(res.data.reverse());
          }).catch((err)=>{
             console.log(err);
          })
-         axios.get(`https://fishfarm.onrender.com/login/${data.userphone}`).then((res)=>{
+         axios.get(`http://localhost:5000/login/${data.userphone}`).then((res)=>{
                      setRedata(res.data)
          }).catch((err)=>{
             console.log(err)
@@ -37,9 +40,64 @@ const Dashboard =()=>{
 
         }
 
+        const [modalHandle2, setModalHandle2] = useState('none');
+        const [pId , setSinlgeId] = useState('')
+
+         const claim = async ()=>{
+              
+            axios.post(`http://localhost:5000/claim/${data?.userId}`, {pId}).then((res)=>{
+                setClaimRes(res.data);
+                if(res.status === 200){
+                    setModalHandle('flex');
+                    setModalTitle(res.data);
+                    setModalHandle2('none');
+                }
+            }).catch((error)=>{
+                console.log(error);
+            })
+         }
+
+       
+
+         const modalFunc=()=>{
+            setModalHandle('none');
+            push('/buyfish');
+            setTimeout(()=>{
+                push('/dashboard');
+            }, 2000)
+           
+          }  
+
+          const modalFunc2=()=>{
+            setModalHandle2('none');
+          }
     return(
         <>
-        <div className="bg-gradient-to-t from-[#11292d] overflow-hidden h-screen to-sky-500 relative ">
+        <div style={{display:modalHandle2}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
+             <div className="w-[320px] flex flex-col py-10 px-3 justify-center items-center h-[320px] rounded-xl bg-white">
+                   <h2 className="text-md font-bold text-center ">NOTE: if you claim your earnings from here you will not able to earn from this investment</h2>
+                  
+                   <div className="flex justify-around items-center flex-row  w-full ">
+                   <button onClick={modalFunc2} className="bg-black py-3  mt-5 rounded-full text-white px-5 font-black">cancel it</button>
+                   <button onClick={claim} className="bg-black py-3 mt-5 rounded-full text-white px-5 font-black">claim it</button>
+                   
+                   </div>
+             </div>
+    </div>
+
+
+    <div style={{display:modalHandle}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
+             <div className="w-[320px] flex flex-col p-10 justify-center items-center h-[320px] rounded-xl bg-white">
+                   <h2 className="text-md font-bold text-center ">{modalTitle}</h2>
+                   <button onClick={modalFunc} className="bg-black p-5 mt-5 rounded-full text-white px-20 font-black">Okay</button>
+                   
+             </div>
+    </div>
+
+
+
+
+        <div className="bg-gradient-to-t from-[#11292d] overflow-x-hidden h-screen to-sky-500 relative ">
        
 
        <img src="images/fish.png" alt="fish"  className="w-[140px] h-[140px] fish1 absolute"/>
@@ -71,7 +129,7 @@ const Dashboard =()=>{
     </div>
 
        {
-        data ?   <div className="h-auto pb-10  w-full bg-[#00000069] flex-col flex justify-start items-center  absolute top-0 left-0">
+        data ?   <div className="h-auto  pb-10  w-full bg-[#00000069] flex-col flex justify-start items-center  absolute top-0 left-0">
         <div className="absolute top-0 left-0 w-full">
         <Nav color={'#fff'} visibility={'none'} vl={'block'}  wd={'30%'}/>
         </div>
@@ -80,7 +138,9 @@ const Dashboard =()=>{
                 <div className="flex flex-col justify-center px-5 my-5 items-start">
                 <h2 className="text-white font-black text-xl">Balance</h2>
                 <div className="w-full h-[2px] bg-[#fff] my-2"></div>
-                <h2 className="text-white font-black text-2xl">₱{Math.floor(reData?.balance)}</h2>
+               {
+                reData.balance && reData.balance ?  <h2 className="text-white font-black text-2xl">₱{reData?.balance.toFixed(3)}</h2> : <h2 className="text-white font-black text-2xl">₱0</h2>
+               }
                 
                     
                 </div>
@@ -138,7 +198,7 @@ const Dashboard =()=>{
                                 trans &&  trans.map((el) => (
                     
                                    el.isWithdrawn == false?  <div key={el._id} className="trans_card my-5 bg-[#0098ff75] w-[60%] mx-auto flex justify-between items-center px-5 py-3 rounded-xl">
-                                   <div className="">
+                                   <div className="tr_icon">
                                       <img src="images/transfergreen.png" alt="transfer green"  className="w-[25px] h-[25px]"/>
                                       {
                                     el.isWithdrawn == false ?  <p className="text-green-600 text-sm mt-0">bought</p> : el.isWithdrawn == true ? <p className="text-red-600 text-sm mt-0">withdrawn</p>:<p className="text-red-600 text-sm mt-0"></p>
@@ -146,8 +206,9 @@ const Dashboard =()=>{
                                    </div>
                                    <div className="">
                                     <p className="text-white text-sm mt-0">{moment(el?.createdAt).format("MMM YYYY h:m:s a")}</p>
-                                     <p className="text-white">earning from this product</p>
-                                    <p className="text-white font-black ">₱{el?.earnings.toFixed(2)}</p>
+                                     <p className="text-white">you Earned from <span className="font-black text-black">{el?.productName}</span></p>
+                                    <p className="text-white font-black ">₱{el?.earnings.toFixed(4)}</p>
+                                    <button onClick={()=> {setModalHandle2('flex'), setSinlgeId(el?._id)}} className="text-white bg-black font-black mt-3 w-[100px] h-[40px] rounded-lg ">claim</button>
                                      </div>
                                      <div className="">
                                      <LazyLoadImage
@@ -158,7 +219,8 @@ const Dashboard =()=>{
                                             height={35}
                                             className="rounded-full h-[35px] w-[35]"
                                             />
-                                        <p className="text-[#289f8b] text-sm mt-2 ">{el.productName}</p>
+                                            {claim}
+                                        <p className="font-black text-black text-sm mt-2 ">{el.productName}</p>
                                      
                                      </div>
 

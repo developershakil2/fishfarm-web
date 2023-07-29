@@ -391,7 +391,13 @@ body {
 .navBtn{
   display:none
 }
+.tr_icon{
+  display:block;
+}
 @media screen and (max-width:768px){
+  .tr_icon{
+    display:none;
+  }
   .cat_wrap{
     flex-direction:column;
     width:95%;
