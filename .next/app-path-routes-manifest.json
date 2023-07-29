@@ -1,13 +1,13 @@
 {
-  "/page": "/",
   "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
   "/(auth)/buyfish/page": "/buyfish",
-  "/(auth)/dashboard/page": "/dashboard",
-  "/(auth)/login/page": "/login",
   "/(auth)/addbal/page": "/addbal",
+  "/(auth)/dashboard/page": "/dashboard",
   "/(auth)/profile/page": "/profile",
+  "/(auth)/login/page": "/login",
   "/(auth)/signup/page": "/signup",
-  "/(auth)/wallet/page": "/wallet",
+  "/(auth)/withdraw/page": "/withdraw",
   "/(auth)/referral/page": "/referral",
-  "/(auth)/withdraw/page": "/withdraw"
+  "/(auth)/wallet/page": "/wallet"
 }
