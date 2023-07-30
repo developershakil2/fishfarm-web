@@ -38,13 +38,13 @@ export default function Home() {
          <Nav color={'#fff'} visibility={'block'} wd={'200px'} vl={'none'}/>
          </div>
         <h1 className="text-white text-4xl font-black">Welcome To</h1>
-        <h1 className="text-white text-4xl px-2  text-center font-black">Fish Farm Investment World</h1>
+        <h1 className="text-white text-4xl px-2  text-center font-black">Isda Farm Investment World</h1>
           
           <div className="w-[680px] hero_p  flex justify-center items-center flex-col mx-auto">
             <p className="text-center mt-4  text-white">
-            Dive into Success with Fish Farm Investment World - The Future of Aquaculture.
-Unlock Profitable Opportunities in Aquaculture with Fish Farm Investment World.
-Make Waves in the Aquaculture Industry - Invest in Fish Farm Investment World Today.
+            Dive into Success with Isda Farm Investment World - The Future of Aquaculture.
+Unlock Profitable Opportunities in Aquaculture with Isda Farm Investment World.
+Make Waves in the Aquaculture Industry - Invest in Isda Farm Investment World Today.
             </p>
 
             <a href="/login" className="py-4 px-8 backdrop-blur-2xl rounded-xl mt-5 bg-[#00e5ff17] font-black text-white">Get Started</a>
