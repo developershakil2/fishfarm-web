@@ -12,7 +12,7 @@ const Nav =({color, visibility, vl, wd})=>{
                  <div className="container naviwrap items-start justify-between flex mx-auto">
                      <div className="h-[60px] m-3 flex items-center justify-start">
                            <img className="rounded-full h-[53px] w-[55px]" src="images/logo.png" alt="log"/>
-                           <span className="ml-2 font-black" style={{color:color}}>FishFarm</span>
+                           <span className="ml-2 font-black" style={{color:color}}>Isda Farm</span>
                      </div>
 
 
