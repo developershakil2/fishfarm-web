@@ -108,11 +108,11 @@ const Withdraw =()=>{
                                <h2 className='text-center font-black pt-4 pb-5 text-white text-xl w-full'>Withdraw</h2>
                                <div className="flex flex-col justify-center px-5 w-full items-start">
                   <label  name="phone" className="text-white font-bold ml-3 text-sm">Your Bank Account Name *</label>
-                  <input type="text" value={bankName} onChange={(e)=> setBankName(e.target.value)}  className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="bank Account Name*" />
+                  <input type="text" value={bankName} onChange={(e)=> setBankName(e.target.value)}  className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="Bank Account Name*" />
               </div>
               <div className="flex flex-col mt-4 justify-center px-5 w-full items-start">
                   <label  name="phone" className="text-white font-bold ml-3 text-sm">Your Bank Account Number*</label>
-                  <input value={bank} onChange={(e)=> setBank(e.target.value)} type="number" className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="bank Account Number*" />
+                  <input value={bank} onChange={(e)=> setBank(e.target.value)} type="number" className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="Bank Account Number*" />
               </div>
               <div className="flex flex-col mt-4 justify-center px-5 w-full items-start">
                   <label  name="phone" className="text-white font-bold ml-3 text-sm">Amount *</label>
