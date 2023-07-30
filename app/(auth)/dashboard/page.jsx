@@ -75,7 +75,7 @@ const Dashboard =()=>{
         <>
         <div style={{display:modalHandle2}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
              <div className="w-[320px] flex flex-col py-10 px-3 justify-center items-center h-[320px] rounded-xl bg-white">
-                   <h2 className="text-md font-bold text-center ">NOTE: if you claim your earnings from here you will not able to earn from this investment</h2>
+                   <h2 className="text-md font-bold text-center ">WARNING! ⚠️ if you claim your earnings from here you will not able to earn from this investment</h2>
                   
                    <div className="flex justify-around items-center flex-row  w-full ">
                    <button onClick={modalFunc2} className="bg-black py-3  mt-5 rounded-full text-white px-5 font-black">cancel it</button>
