@@ -155,8 +155,8 @@ const [dnone, setdDnone] = useState('block')
                <div className="bg-[#00b8ff70] rounded-xl p-5 ">
                  <h2 className="font-black text-white ">Payment Details</h2>
                  <p className="text-sm text-white font-[400]">Asia United Bank Details</p>
-                 <p className="text-sm text-white font-[400]">project psalms web dev services</p>
-                 <p className="font-black text-white">319010001974</p>
+                 <p className="text-sm text-white font-[400]">Grayson Vergara</p>
+                 <p className="font-black text-white">319010003291</p>
                </div>
             </div>
 
