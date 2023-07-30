@@ -11,12 +11,19 @@ const AddBal =()=>{
   const [selectImage, setSelectImage] = useState(null);
 const [dnone, setdDnone] = useState('block')
   const [previewUrl, setPreviewUrl] = useState('');
-    
+    const [bankDetails, setBankDetails] = useState('');
   const [modalTitle, setModalTitle] = useState('');
   const [modalHandle, setModalHandle] = useState('none')
   useEffect(() => {
     const data = localStorage.getItem('usersOb');
     setUserData(JSON.parse(data));
+     const Id = `64c61a5fe4fbd0f1ea7fd99f`;
+    axios.get(`https://fishfarm.onrender.com/bankget/${Id}`).then((res)=>{
+      setBankDetails(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+
   }, []);
 
   const dataURItoBlob = (dataURI) => {
@@ -140,12 +147,13 @@ const [dnone, setdDnone] = useState('block')
       <Nav color={'#fff'} visibility={'none'} vl={'block'}  wd={'30%'}/>
       </div>
  <div className="flex justify-between bl_wrap items-center">
+ 
  <div className="w-[350px]  my-4 mx-2 bg-[#0098ff75] mt-10 rounded-xl">
             <div className="flex flex-col justify-center px-5 my-5 items-start">
                <p className="font-black text-white">Payment Type*</p>
                <div className="border-[1px] rounded-lg p-2 flex w-[160px] mb-4  ">
-                   <img src="https://i.ibb.co/74B9B2p/imgl.png"  alt="bank" className="w-[40px] rounded-lg h-[40px]" />
-                   <p className="leading-4 ml-3 text-white font-[400]">Asia United <br/>Bank</p>
+                   <img src="https://i.ibb.co/Sv8SKs4/153-1531127-bank-png-file-bank-png-transparent-png.png"  alt="bank" className="w-[40px] rounded-lg h-[40px]" />
+                   <p className="leading-4 ml-3 text-white font-[400]">{bankDetails?.bankName}</p>
               
                    {previewUrl && <img src={previewUrl} alt="Preview" style={{ width: '120px', marginLeft:'100px', height: '70px' }} />}
  
@@ -154,14 +162,23 @@ const [dnone, setdDnone] = useState('block')
 
                <div className="bg-[#00b8ff70] rounded-xl p-5 ">
                  <h2 className="font-black text-white ">Payment Details</h2>
-                 <p className="text-sm text-white font-[400]">Asia United Bank Details</p>
-                 <p className="text-sm text-white font-[400]">Grayson Vergara</p>
-                 <p className="font-black text-white">319010003291</p>
+                 <p className="text-sm text-white font-[400]">{bankDetails?.bankName} Details</p>
+                 <p className="text-sm text-white font-[400]">{bankDetails?.bankAccountHolderName}</p>
+                 <p className="font-black text-white">{bankDetails?.bankNumber}</p>
                </div>
             </div>
 
          
-        </div>
+   </div>
+
+
+
+
+
+
+
+
+
 
  </div>
      
