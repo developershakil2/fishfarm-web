@@ -75,7 +75,7 @@ const Dashboard =()=>{
         <>
         <div style={{display:modalHandle2}} className="absolute bg-[#000000bb] z-50 top-0 left-0 w-full h-screen flex justify-center items-center">
              <div className="w-[320px] flex flex-col py-10 px-3 justify-center items-center h-[320px] rounded-xl bg-white">
-                   <h2 className="text-md font-bold text-center ">WARNING! ⚠️ if you claim your earnings from here you will not able to earn from this investment</h2>
+                   <h2 className="text-md font-bold text-center ">⚠️WARNING! if you harvest your fish and claim your earnings from here, your fish will be gone.</h2>
                   
                    <div className="flex justify-around items-center flex-row  w-full ">
                    <button onClick={modalFunc2} className="bg-black py-3  mt-5 rounded-full text-white px-5 font-black">cancel it</button>
@@ -208,7 +208,7 @@ const Dashboard =()=>{
                                     <p className="text-white text-sm mt-0">{moment(el?.createdAt).format("MMM YYYY h:m:s a")}</p>
                                      <p className="text-white">you Earned from <span className="font-black text-black">{el?.productName}</span></p>
                                     <p className="text-white font-black ">₱{el?.earnings.toFixed(4)}</p>
-                                    <button onClick={()=> {setModalHandle2('flex'), setSinlgeId(el?._id)}} className="text-white bg-black font-black mt-3 w-[100px] h-[40px] rounded-lg ">claim</button>
+                                    <button onClick={()=> {setModalHandle2('flex'), setSinlgeId(el?._id)}} className="text-white bg-black font-black mt-3 w-[100px] h-[40px] rounded-lg ">harvest</button>
                                      </div>
                                      <div className="">
                                      <LazyLoadImage
