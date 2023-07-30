@@ -144,7 +144,7 @@ const [dnone, setdDnone] = useState('block')
             <div className="flex flex-col justify-center px-5 my-5 items-start">
                <p className="font-black text-white">Payment Type*</p>
                <div className="border-[1px] rounded-lg p-2 flex w-[160px] mb-4  ">
-                   <img src="images/bank.png"  alt="bank" className="w-[40px] rounded-lg h-[40px]" />
+                   <img src="https://i.ibb.co/74B9B2p/imgl.png"  alt="bank" className="w-[40px] rounded-lg h-[40px]" />
                    <p className="leading-4 ml-3 text-white font-[400]">Asia United <br/>Bank</p>
               
                    {previewUrl && <img src={previewUrl} alt="Preview" style={{ width: '120px', marginLeft:'100px', height: '70px' }} />}
