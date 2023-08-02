@@ -1,0 +1,8 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(auth)/withdraw/page": "app/(auth)/withdraw/page.js",
+  "/(auth)/wallet/page": "app/(auth)/wallet/page.js",
+  "/(auth)/profile/page": "app/(auth)/profile/page.js",
+  "/(auth)/dashboard/page": "app/(auth)/dashboard/page.js",
+  "/(auth)/addbal/page": "app/(auth)/addbal/page.js"
+}
