@@ -13,7 +13,8 @@ const BuyFish =()=>{
   const [catData, setCatData] = useState(null);
   const [catValue , setCatValue] = useState(null);
   const [modalTitle, setModalTitle] = useState('');
-  const [modalHandle, setModalHandle] = useState('none')
+  const [modalHandle, setModalHandle] = useState('none');
+  const [buyBtn, setBuyBtn] = useState('block');
   useEffect(() => {
     const data = localStorage.getItem('usersOb');
     setUserData(JSON.parse(data));
@@ -27,7 +28,10 @@ const BuyFish =()=>{
 
   const postHandle = () => {
     try {
-  
+        setBuyBtn('none');
+      setTimeout(()=>{
+        setBuyBtn('block');
+      },4000);
       if (amount && amount < 1000) {
         setModalHandle('flex')
         setModalTitle("minimum buy 1000 peso ");
@@ -192,7 +196,7 @@ const modalFunc=()=>{
             </div>
 
             <div className="flex flex-col justify-center px-5 w-full items-start">
-                <button type="button" onClick={()=> postHandle()} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
+                <button style={{display:buyBtn}} type="button" onClick={()=> postHandle()} className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
                    Buy Now
                 </button>
               
