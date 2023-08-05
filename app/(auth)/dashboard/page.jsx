@@ -208,7 +208,7 @@ const Dashboard =()=>{
                                     <p className="text-white text-sm mt-0">{moment(el?.createdAt).format("MMM YYYY h:m:s a")}</p>
                                      <p className="text-white">you Earned from <span className="font-black text-black">{el?.productName}</span></p>
                                     <p className="text-white font-black ">₱{el?.earnings.toFixed(4)}</p>
-                                    <button onClick={()=> {setModalHandle2('flex'), setSinlgeId(el?._id)}} className="text-white bg-black font-black mt-3 w-[100px] h-[40px] rounded-lg ">harvest</button>
+                                    <button style={{display:'none'}} onClick={()=> {setModalHandle2('flex'), setSinlgeId(el?._id)}} className="text-white bg-black font-black mt-3 w-[100px] h-[40px] rounded-lg "></button>
                                      </div>
                                      <div className="">
                                      <LazyLoadImage
