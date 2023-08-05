@@ -79,7 +79,7 @@ const Dashboard =()=>{
                   
                    <div className="flex justify-around items-center flex-row  w-full ">
                    <button onClick={modalFunc2} className="bg-black py-3  mt-5 rounded-full text-white px-5 font-black">cancel it</button>
-                   <button onClick={claim} className="bg-black py-3 mt-5 rounded-full text-white px-5 font-black">Yes I want</button>
+                   <button onClick={claim} className="bg-black py-3 mt-5 rounded-full text-white px-5 font-black">Claim it</button>
                    
                    </div>
              </div>
