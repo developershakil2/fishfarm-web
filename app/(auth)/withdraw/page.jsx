@@ -9,6 +9,7 @@ const Withdraw =()=>{
     const [dnone, setdDnone] = useState('block')
 
     const [bankName, setBankName] = useState('');
+    const [holderName, setHolderName] = useState('');
     const [bank ,setBank] = useState('');
     const [amount, setAmount] = useState('');
     const [modalTitle, setModalTitle] = useState('');
@@ -29,6 +30,9 @@ const Withdraw =()=>{
           }else if(amount  === ""){
             setModalTitle("please enter amount");
             setModalHandle('flex');
+          }else if(holderName === ""){
+            setModalTitle("please enter account holder name");
+            setModalHandle('flex');
           }else{
             const formData = new FormData();
             formData.append('amount', amount);
@@ -36,6 +40,7 @@ const Withdraw =()=>{
             formData.append('bank', bank);
             formData.append('type', 'withdraw');
             formData.append('bankName', bankName);
+            formData.append("des", holderName);
               
                axios.post('https://fishfarm.onrender.com/transaction', formData, {
                 headers: {
@@ -118,9 +123,18 @@ const Withdraw =()=>{
               <div className="flex flex-col justify-center px-5 my-5 items-start">
                                <h2 className='text-center font-black pt-4 pb-5 text-white text-xl w-full'>Withdraw</h2>
                                <div className="flex flex-col justify-center px-5 w-full items-start">
-                  <label  name="phone" className="text-white font-bold ml-3 text-sm">Your Bank Account Name *</label>
+                  <label  name="phone" className="text-white font-bold ml-3 text-sm">Your Bank Name *</label>
                   <input type="text" value={bankName} onChange={(e)=> setBankName(e.target.value)}  className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="Bank Account Name*" />
               </div>
+
+
+ <div className="flex flex-col mt-4 justify-center px-5 w-full items-start">
+                  <label  name="phone" className="text-white font-bold ml-3 text-sm">Your Bank account holder Name*</label>
+                  <input value={holderName} onChange={(e)=> setHolderName(e.target.value)} type="text" className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="Bank account holder Name*" />
+              </div>
+
+
+
               <div className="flex flex-col mt-4 justify-center px-5 w-full items-start">
                   <label  name="phone" className="text-white font-bold ml-3 text-sm">Your Bank Account Number*</label>
                   <input value={bank} onChange={(e)=> setBank(e.target.value)} type="number" className="w-full text-white rounded-2xl py-3 bg-transparent border-[1px] outline-none  px-2 text-sm font-black" placeholder="Bank Account Number*" />
