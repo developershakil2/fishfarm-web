@@ -80,7 +80,7 @@ const Referral =()=>{
                            <h2 className='text-center font-black pt-4 pb-5 text-white text-xl w-full'>Reffer To Your Friends</h2>
                           <img src="images/refer.png" alt="refer" className="w-[200px] mx-auto h-[150px]" />
                           <div className="w-[90%] border-[1px] rounded-xl mx-auto">
-                          <h3 className="text-center text-sm font-[600] text-white  my-4">{refLink}</h3>
+                                <input value={refLink}  className="text-center text-sm font-[600] bg-transparent px-2 text-white w-full h-[24px]  my-4"/>
            </div>
           <div className="flex mt-3 flex-col justify-center px-5 w-full items-start">
               <button onClick={ ()=> navigator.clipboard.writeText(refLink) } className="w-full rounded-2xl mt-5 text-white py-3 bg-transparent border-[1px] outline-none  px-2 text-md font-black" >
