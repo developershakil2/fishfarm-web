@@ -71,7 +71,7 @@ setActualRefLink(actualLink);
       formData.append("phone", phone);
       formData.append("username", username);
       formData.append('password', password);
-      formData.append('referralCode', referral);
+      formData.append('referralCode', actualRefLink);
       const blob = dataURItoBlob(previewUrl);
       const uniqueFilename = `proofImg_${Date.now()}.jpg`;
 
