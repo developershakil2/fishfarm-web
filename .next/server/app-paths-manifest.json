@@ -1,0 +1,13 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/(auth)/addbal/page": "app/(auth)/addbal/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(auth)/buyfish/page": "app/(auth)/buyfish/page.js",
+  "/(auth)/dashboard/page": "app/(auth)/dashboard/page.js",
+  "/(auth)/referral/page": "app/(auth)/referral/page.js",
+  "/(auth)/register/page": "app/(auth)/register/page.js",
+  "/(auth)/profile/page": "app/(auth)/profile/page.js",
+  "/(auth)/withdraw/page": "app/(auth)/withdraw/page.js",
+  "/(auth)/wallet/page": "app/(auth)/wallet/page.js"
+}

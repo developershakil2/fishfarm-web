@@ -1,0 +1,13 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/(auth)/addbal/page": "/addbal",
+  "/(auth)/login/page": "/login",
+  "/(auth)/buyfish/page": "/buyfish",
+  "/(auth)/dashboard/page": "/dashboard",
+  "/(auth)/referral/page": "/referral",
+  "/(auth)/register/page": "/register",
+  "/(auth)/profile/page": "/profile",
+  "/(auth)/withdraw/page": "/withdraw",
+  "/(auth)/wallet/page": "/wallet"
+}
