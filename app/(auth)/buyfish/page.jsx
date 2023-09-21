@@ -1,4 +1,4 @@
-
+l
 'use client'
 import axios from "axios";
 import Nav from "../../(components)/Nav";
@@ -37,9 +37,9 @@ const BuyFish =()=>{
         setModalHandle('flex');
         setModalTitle("please enter minumum amount to buy product");
       }else{
-        if (amount && amount < 100000) {
+        if (amount && amount < 100 || amount > 1000000) {
           setModalHandle('flex')
-          setModalTitle("minimum buy 100000 peso ");
+          setModalTitle("minimum buy 100 peso and maximum buy 1000000 ");
         }else{
           axios
           .post('https://fishfarm.onrender.com/buyfish',
