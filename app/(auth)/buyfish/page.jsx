@@ -37,9 +37,9 @@ const BuyFish =()=>{
         setModalHandle('flex');
         setModalTitle("please enter minumum amount to buy product");
       }else{
-        if (amount && amount < 1000) {
+        if (amount && amount < 100000) {
           setModalHandle('flex')
-          setModalTitle("minimum buy 1000 peso ");
+          setModalTitle("minimum buy 100000 peso ");
         }else{
           axios
           .post('https://fishfarm.onrender.com/buyfish',
