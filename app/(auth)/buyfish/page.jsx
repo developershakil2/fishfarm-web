@@ -1,4 +1,4 @@
-l
+
 'use client'
 import axios from "axios";
 import Nav from "../../(components)/Nav";
